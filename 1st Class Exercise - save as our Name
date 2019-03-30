@@ -1,0 +1,44 @@
+package SelPackage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
+//comment the above line and uncomment below line to use Chrome
+import org.openqa.selenium.chrome.ChromeDriver;
+public class SeleniumClass {
+
+	//comment the above line and uncomment below line to use Chrome
+
+ 
+		@Test
+		
+		public void test()
+		{
+		
+ 
+	        // declaration and instantiation of objects/variables
+	    	//System.setProperty("webdriver.firefox.marionette","C:\\geckodriver.exe");
+			//WebDriver driver = new FirefoxDriver();
+			
+			System.setProperty("webdriver.chrome.driver","C:\\ChromeDriver\\chromedriver.exe");
+			WebDriver driver = new ChromeDriver();
+	    	
+	        String baseUrl = "https://demo.guru99.com/V4/";
+	        String expectedTitle = "Welcome: Mercury Tours";
+	        String actualTitle = "";
+
+
+	        driver.get(baseUrl);
+
+	        driver.findElement(By.name("uid")).sendKeys("mngr184115");
+	        driver.findElement(By.name("password")).sendKeys("azUrupE");
+	        driver.findElement(By.name("btnLogin")).click();
+
+	        System.out.println (driver.findElement(By.xpath("//tr[@class='heading3']/td")).getText());
+	     
+	        driver.close();
+		}
+	    
+
+
+}
