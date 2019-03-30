@@ -1,0 +1,98 @@
+[3:23 PM, 3/30/2019] Kushan Sir: package pages;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class HomePage {
+
+
+	    WebDriver driver;
+
+	    By homePageUserName = By.xpath("//table//tr[@class='heading3']");
+
+	    
+
+	    public HomePage(WebDriver driver){
+
+	        this.driver = driver;
+
+	    }
+
+	    //Get the User name from Home Page
+
+	        public String getHomePageDashboardUserName(){
+
+	         return    driver.findElement(homePageUserName).getText();
+
+	        }
+
+	}
+[3:34 PM, 3/30/2019] Kushan Sir: `package SelPackage;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+
+import org.testng.Assert;
+
+import org.testng.annotations.BeforeTest;
+
+import org.testng.annotations.Test;
+
+import pages.LoginPage;
+
+import pages.HomePage;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+public class SeleniumClass {
+
+	//comment the above line and uncomment below line to use Chrome
+
+ 
+		@Test
+		
+		public void test()
+		{
+		
+			    WebDriver driver;
+
+			    LoginPage objLogin;
+
+			    HomePage objHomePage;
+				System.setProperty("webdriver.chrome.driver","C:\\ChromeDriver\\chromedriver.exe");
+			    driver = new ChromeDriver();
+
+			    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+			    driver.get("http://demo.guru99.com/V4/");
+
+			    
+			    //Create Login Page object
+
+			    objLogin = new LoginPage(driver);
+
+			    //Verify login page title
+
+			    String loginPageTitle = objLogin.getLoginTitle();
+
+			    Assert.assertTrue(loginPageTitle.toLowerCase().contains("guru99 bank"));
+
+			    //login to application
+
+			    objLogin.loginToGuru99("mgr123", "mgr!23");
+
+			    // go the next page
+
+			    objHomePage = new HomePage(driver);
+
+			    //Verify home page
+
+			    Assert.assertTrue(objHomePage.getHomePageDashboardUserName().toLowerCase().contains("manger id : mgr123"));
+
+		
+			
+		
+	        driver.close();
+		}
+	    
+
+
+}
